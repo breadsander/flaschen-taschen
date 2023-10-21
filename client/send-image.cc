@@ -143,11 +143,22 @@ void DisplayAnimation(const std::vector<Magick::Image> &image_sequence,
         PreprocessedFrame *frame = frames[i];
         frame->Send();  // Simple. just send it.
         if (frames.size() == 1) {
-            sleep(1);
+            break;
         } else {
             usleep(frame->delay_micros());
         }
     }
+
+    /*
+     * If this is just a single image let's keep it up for as long as we
+     * need. No need to return and end the program.
+     */
+    while (frames.size() == 1 &&
+           time(NULL) <= end_time &&
+           !interrupt_received) {
+        sleep(1);
+    }
+    
     // Leaking PreprocessedFrames. Don't care.
 }
 
