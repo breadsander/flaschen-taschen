@@ -143,7 +143,7 @@ void DisplayAnimation(const std::vector<Magick::Image> &image_sequence,
         PreprocessedFrame *frame = frames[i];
         frame->Send();  // Simple. just send it.
         if (frames.size() == 1) {
-            return;  // We are done.
+            sleep(1)
         } else {
             usleep(frame->delay_micros());
         }
@@ -201,7 +201,7 @@ int main(int argc, char *argv[]) {
     int scroll_delay_ms = 50;
     int brighness_percent = 100;
     const char *host = NULL;
-    int timeout = 1000000;
+    int timeout = 10000000;
 
     int opt;
     while ((opt = getopt(argc, argv, "g:h:s::Cl:b:t:c")) != -1) {
