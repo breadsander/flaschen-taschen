@@ -143,7 +143,7 @@ void DisplayAnimation(const std::vector<Magick::Image> &image_sequence,
         PreprocessedFrame *frame = frames[i];
         frame->Send();  // Simple. just send it.
         if (frames.size() == 1) {
-            sleep(1)
+            sleep(1);
         } else {
             usleep(frame->delay_micros());
         }
